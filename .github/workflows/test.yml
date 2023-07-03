@@ -1,8 +1,12 @@
-name: Test Workflow
+name: github-action-pratice
 on: push
 jobs:
-    lint:
+  workflow-1:
     runs-on: ubuntu-latest
     steps:
-        - name: Lint
-        run: echo "Lint" 
+      - name: lint
+        run: echo "stage lint"
+      - name: build
+        run: echo "stage build"
+      - name: deploy
+        run: echo "stage deploy"
