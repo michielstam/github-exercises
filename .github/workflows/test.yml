@@ -1,7 +1,7 @@
 name: github-action-pratice
 on: push
 jobs:
-  workflow-1:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -13,8 +13,32 @@ jobs:
       - name: init
         run: npm ci
       - name: lint
-        run: npm run lint
-      - name: build
-        run: npm run build
-      - name: deploy
-        run: npm run deploy
+        run: npm run lint  
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18   
+      - name: ci
+        run: npm ci
+      - name: test
+        run: npm run test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v3
+      - name: Install NodeJS
+        uses: actions/setup-node@v3
+        with:
+            node-version: 18   
+      - name: ci
+        run: npm ci
+      - name: test
+        run: npm run build    
