@@ -1,0 +1,4 @@
+name: github-action-issue
+on: 
+  issue_comment:
+    types: [created, deleted]
